@@ -1,0 +1,7 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+# ignore venv
+venv/
+
+# Ignore macOS system files
+.DS_Store
