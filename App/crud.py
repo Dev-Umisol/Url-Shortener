@@ -28,4 +28,10 @@ def create_short_url(db: Session, original_url: str) -> models.URL:
     
     return db_url
     
+def get_url_by_code(db: Session, code: str) -> models.URL | None:
+    return db.query(models.URL).filter(models.URL.short_code == code).first()
+
+def increment_clicks(db: Session, url: models.URL) -> None:
+    url.clicks += 1
+    db.commit()
     
