@@ -21,13 +21,14 @@ def create_short_url(db: Session, original_url: str) -> models.URL:
         if not db.query(models.URL).filter(models.URL.short_code == code).first():
             break
     
-    db_url = models.URL(original_url=original_url, short_code=code)
-    db.add(db_url)
-    db.commit()
-    db.refresh(db_url)
+    db_url = models.URL(original_url=original_url, short_code=code) # Create a new URL object
+    db.add(db_url) # <-- new row
+    db.commit() # <-- save to database
+    db.refresh(db_url) # <-- get the generated ID and other fields
     
     return db_url
     
+# Returns none if no row matches
 def get_url_by_code(db: Session, code: str) -> models.URL | None:
     return db.query(models.URL).filter(models.URL.short_code == code).first()
 
