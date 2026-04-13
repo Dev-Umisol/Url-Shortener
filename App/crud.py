@@ -33,6 +33,6 @@ def get_url_by_code(db: Session, code: str) -> models.URL | None:
     return db.query(models.URL).filter(models.URL.short_code == code).first()
 
 def increment_clicks(db: Session, url: models.URL) -> None:
-    url.clicks += 1
+    url.clicks += 1 # type: ignore
     db.commit()
     
